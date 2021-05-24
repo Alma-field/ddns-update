@@ -17,8 +17,12 @@ class DDNS():
         raise NotImplementedError('NotImplementedError')
 
     def get_nowip(self):
-        url = 'http://alma-field-vpn.tplinkdns.com/ipaddress'
-        response = get(url).json()
+        try:
+            url = 'https://webinfo.alma-field.com/ipaddress'
+            response = get(url).json()
+        except:
+            url = 'https://alma-webinfo.herokuapp.com/ipaddress'
+            response = get(url).json()
         ipaddress = response['value']
         return ipaddress
 
