@@ -1,5 +1,5 @@
 from ssl import wrap_socket
-from socket import socket
+from socket import socket, AF_INET, SOCK_STREAM
 
 from .ddns import DDNS
 
@@ -9,7 +9,7 @@ class OnamaeCom(DDNS):
 
     def updateip(self, ipaddress):
         for host in self.hosts:
-            sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock = socket(AF_INET, SOCK_STREAM)
             sock.settimeout(10)
             s = wrap_socket(sock)
             s.connect(("ddnsclient.onamae.com", 65010))
