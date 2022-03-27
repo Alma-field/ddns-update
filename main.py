@@ -45,6 +45,7 @@ if __name__ == "__main__":
     from validate.regexp import Regexp
     arg_parser.add_argument('-ip', '--ipaddress', choices=Regexp('[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}'))
     arg_parser.add_argument('-dns', '--dns', choices=['google'], default='google')
+    arg_parser.add_argument('-f', '--force', action='store_true')
     options = arg_parser.parse_args()
 
     ddns = get_ddns(options)
@@ -57,6 +58,6 @@ if __name__ == "__main__":
         old_ip = dns(domain.strip('.'))
         target, *host = domain.split('.')
         host = '.'.join(host)
-        if not old_ip == new_ip:
+        if options.force or not old_ip == new_ip:
             ddns.updateip(target, host, new_ip)
             print(f'{domain} updated.')
