@@ -34,6 +34,8 @@ if __name__ == "__main__":
         usage='Usage: python ' + __file__ + ''.join(args))
     from ddns import ALL as service_list
     arg_parser.add_argument('-s', '--service', choices=service_list, default='onamaecom')
+    from validate.regexp import Regexp
+    arg_parser.add_argument('-ip', '--ipaddress', choices=Regexp('[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}'))
     options = arg_parser.parse_args()
 
     if options.service == 'onamaecom':
