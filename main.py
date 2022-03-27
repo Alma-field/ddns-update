@@ -38,10 +38,7 @@ if __name__ == "__main__":
     arg_parser.add_argument('-ip', '--ipaddress', choices=Regexp('[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}'))
     options = arg_parser.parse_args()
 
-    if options.service == 'onamaecom':
-        ddns = OnamaeCom()
-    else:
-        raise NotImplementedError('NotImplementedError')
+    ddns = get_ddns(options)
 
     old_ip = ddns.get_dnsip()
     new_ip = ipaddress(options)
