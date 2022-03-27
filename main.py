@@ -2,9 +2,9 @@ from ddns import OnamaeCom
 
 if __name__ == "__main__":
     from argparse import ArgumentParser
+    args = ['[ --service <service>]']
     arg_parser = ArgumentParser(
-        usage='Usage: python ' + __file__ + ' [--service <service>]'
-    )
+        usage='Usage: python ' + __file__ + ''.join(args))
     service_list = ['onamaecom']
     arg_parser.add_argument('-s', '--service', choices=service_list)
     options = arg_parser.parse_args()
