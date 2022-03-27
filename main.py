@@ -49,9 +49,14 @@ if __name__ == "__main__":
 
     ddns = get_ddns(options)
 
-    old_ip = ddns.get_dnsip()
     new_ip = ipaddress(options)
+    print('Get now ip-address.')
 
-    if not old_ip == new_ip:
-        ddns.updateip(new_ip)
     dns = get_dns(options)
+    for domain in environ.get('DOMAINS', '').split('/'):
+        old_ip = dns(domain.strip('.'))
+        target, *host = domain.split('.')
+        host = '.'.join(host)
+        if not old_ip == new_ip:
+            ddns.updateip(target, host, new_ip)
+            print(f'{domain} updated.')
