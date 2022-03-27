@@ -1,13 +1,8 @@
 from requests import get
 
-#environment vars config 環境変数設定
-# .env ファイルをロードして環境変数へ反映
-from dotenv import load_dotenv
-load_dotenv('./.env', encoding='utf-8')
-from os import environ
-
 class DDNS():
     def __init__(self):
+        from os import environ
         self.user_id = environ['USER_ID']
         self.password = environ['PASSWORD']
         self.hosts = environ['HOSTS'].split(';')
