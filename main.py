@@ -1,8 +1,16 @@
-from ddns import OnamaeCom
 #environment vars config 環境変数設定
 # .env ファイルをロードして環境変数へ反映
 from dotenv import load_dotenv
 load_dotenv('./.env', encoding='utf-8')
+from os import environ
+
+def get_ddns(options):
+    if options.service == 'onamaecom':
+        from ddns import OnamaeCom
+        service = OnamaeCom()
+    else:
+        raise NotImplementedError('NotImplementedError')
+    return service
 
 def ipaddress(options):
     if options.ipaddress is not None:
