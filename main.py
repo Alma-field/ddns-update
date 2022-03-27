@@ -24,7 +24,7 @@ if __name__ == "__main__":
     args = ['[ --service <service>]']
     arg_parser = ArgumentParser(
         usage='Usage: python ' + __file__ + ''.join(args))
-    service_list = ['onamaecom']
+    from ddns import ALL as service_list
     arg_parser.add_argument('-s', '--service', choices=service_list, default='onamaecom')
     options = arg_parser.parse_args()
 
