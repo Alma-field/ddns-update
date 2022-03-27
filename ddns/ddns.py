@@ -5,8 +5,6 @@ class DDNS():
         from os import environ
         self.user_id = environ['USER_ID']
         self.password = environ['PASSWORD']
-        self.hosts = environ['HOSTS'].split(';')
-        self.domain = environ['DOMAIN']
 
     def updateip(self):
         raise NotImplementedError('NotImplementedError')
