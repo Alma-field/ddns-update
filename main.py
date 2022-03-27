@@ -1,5 +1,20 @@
 from ddns import OnamaeCom
 
+def ipaddress(options):
+    if options.ipaddress is not None:
+        old_ip = options.ipaddress
+    else:
+        from ip import ALL
+        for server in ALL:
+            try:
+                old_ip = server()
+                break
+            except:
+                continue
+        else:
+            raise RuntimeError('Could not get the ip address.')
+    return old_ip
+
 if __name__ == "__main__":
     from argparse import ArgumentParser
     args = ['[ --service <service>]']
@@ -15,7 +30,7 @@ if __name__ == "__main__":
         raise NotImplementedError('NotImplementedError')
 
     old_ip = ddns.get_dnsip()
-    new_ip = ddns.get_nowip()
+    new_ip = ipaddress(options)
 
     if not old_ip == new_ip:
         ddns.updateip(new_ip)

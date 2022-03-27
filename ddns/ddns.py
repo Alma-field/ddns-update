@@ -16,16 +16,6 @@ class DDNS():
     def updateip(self):
         raise NotImplementedError('NotImplementedError')
 
-    def get_nowip(self):
-        try:
-            url = 'https://webinfo.alma-field.com/ipaddress'
-            response = get(url).json()
-        except:
-            url = 'https://alma-webinfo.herokuapp.com/ipaddress'
-            response = get(url).json()
-        ipaddress = response['value']
-        return ipaddress
-
     def get_dnsip(self):
         if self.hosts[0] == '':
             domain = self.domain
