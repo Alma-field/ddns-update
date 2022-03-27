@@ -1,4 +1,4 @@
-# Hololive Notice
+# DDNS Update
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
 [![GitHub issues open](https://img.shields.io/github/issues/Alma-field/ddns-update.svg?maxAge=2592000)](https://github.com/Alma-field/ddns-update/issues?q=is%3Aopen+is%3Aissue)
 [![GitHub issues close](https://img.shields.io/github/issues-closed-raw/Alma-field/ddns-update.svg?maxAge=2592000)](https://github.com/Alma-field/ddns-update/issues?q=is%3Aclose+is%3Aissue)
@@ -19,8 +19,7 @@ DDNSのIPアドレスを更新します。
 | ---- | ----------- |
 | USER_ID | 各種サービスのID |
 | PASSWORD | 各種サービスのパスワード |
-| HOSTS | 更新対象のホスト名<br>(セミコロン区切り) |
-| DOMAIN | ドメイン名 |
+| DOMAINS | 更新対象のドメイン名<br>(スラッシュ区切り) |
 
 #### ローカルでテストを行う場合
 1. このリポジトリをローカル環境に複製してください。
@@ -32,16 +31,19 @@ git clone https://github.com/Alma-field/ddns-update
 ```
 USER_ID=各種サービスのユーザーID
 PASSWORD=パスワード
-HOSTS=セミコロン区切りの更新対象ホスト名
-DOMAIN=ドメイン名
+DOMAINS=スラッシュ区切りの更新対象ドメイン名
 ```
-4. `python main.py  [--service <サービス名>]`を実行してください。
+4. `python main.py`を実行してください。(お名前ドットコムの場合)
 
 ### 実行時パラメータ
-| パラメータ名 | 説明 |
-| :--: | -- |
-| **\<service\>** | サービス名 |
-| onamaecom | お名前ドットコム |
+| パラメータ名 | 値 | 説明 |
+| :-: | :-: | - |
+| **-s/--service** | | **DDNSサービス名** |
+| | **onamaecom** | お名前ドットコム |
+| **-dns/--dns** | | **DNSサーバー** |
+| | **google** | dns.google(8.8.8.8) |
+| **-ip/--ipaddress** |  | **更新用IPアドレス**<br>`[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}` |
+| **-f/--force** | | 強制更新 |
 
- - **太字**の場合は必須パラメータです。<br>
+ - 値欄が**太字**の場合はデフォルト値です。
  - 例：`python main.py --service onamaecom`
