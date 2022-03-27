@@ -27,6 +27,14 @@ def ipaddress(options):
             raise RuntimeError('Could not get the ip address.')
     return old_ip
 
+def get_dns(options):
+    if options.dns == 'google':
+        from dns import google
+        dns = google
+    else:
+        raise NotImplementedError('NotImplementedError')
+    return dns
+
 if __name__ == "__main__":
     from argparse import ArgumentParser
     args = ['[ --service <service>]']
@@ -36,6 +44,7 @@ if __name__ == "__main__":
     arg_parser.add_argument('-s', '--service', choices=service_list, default='onamaecom')
     from validate.regexp import Regexp
     arg_parser.add_argument('-ip', '--ipaddress', choices=Regexp('[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}'))
+    arg_parser.add_argument('-dns', '--dns', choices=['google'], default='google')
     options = arg_parser.parse_args()
 
     ddns = get_ddns(options)
@@ -45,3 +54,4 @@ if __name__ == "__main__":
 
     if not old_ip == new_ip:
         ddns.updateip(new_ip)
+    dns = get_dns(options)
