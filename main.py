@@ -6,7 +6,7 @@ if __name__ == "__main__":
     arg_parser = ArgumentParser(
         usage='Usage: python ' + __file__ + ''.join(args))
     service_list = ['onamaecom']
-    arg_parser.add_argument('-s', '--service', choices=service_list)
+    arg_parser.add_argument('-s', '--service', choices=service_list, default='onamaecom')
     options = arg_parser.parse_args()
 
     if options.service == 'onamaecom':
